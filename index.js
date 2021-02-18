@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient
 
 const url = 'mongodb+srv://superAdmin:palmza551@cluster0.aoswi.mongodb.net/sample_weatherdataretryWrites=true&w=majority'
-const client = new MongoClient(url, { useNewUrlParser: true })
+const client = new MongoClient(url, { useNewUrlParser: true,useUnifiedTopology: true})
 
 async function run() {
     try {
@@ -15,8 +15,8 @@ async function run() {
         const collection = db.collection('data')
 
         // Query data
-        const query = { type: 'FM-13' }
-        const weather = await collection.find(query).limit(10)
+        const query = { callLetters: 'RIGG' }
+        const weather = await collection.findOne(query)
         console.log(weather)
     } catch(e) {
         console.log(e)
